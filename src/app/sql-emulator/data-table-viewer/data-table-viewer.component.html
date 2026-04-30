@@ -1,0 +1,58 @@
+<section class="viewer" aria-labelledby="table-viewer-title">
+  <div class="viewer__head">
+    <h2 id="table-viewer-title">Tabla en memoria</h2>
+    @if (emulator.catalogTableNames().length > 0) {
+      <label class="viewer__picker">
+        <span class="viewer__picker-label">Tabla activa</span>
+        <select
+          class="viewer__select"
+          [value]="emulator.activeTableName() ?? ''"
+          (change)="onTableChange($event)"
+          aria-label="Elegir tabla a mostrar"
+        >
+          <option value="">— Elegir —</option>
+          @for (name of emulator.catalogTableNames(); track name) {
+            <option [value]="name">{{ name }}</option>
+          }
+        </select>
+      </label>
+    }
+  </div>
+
+  @if (emulator.activeTable(); as table) {
+    <div class="viewer__meta">
+      <span class="viewer__badge">{{ table.rows.length }} fila(s)</span>
+    </div>
+    <div class="viewer__scroll" role="region" tabindex="0" aria-label="Datos de la tabla">
+      <table class="data-table">
+        <thead>
+          <tr>
+            @for (col of table.definition.columns; track col.name) {
+              <th scope="col">
+                <span class="data-table__col-name">{{ col.name }}</span>
+                <span class="data-table__col-type">{{ col.sqlType }}</span>
+              </th>
+            }
+          </tr>
+        </thead>
+        <tbody>
+          @for (row of table.rows; track $index) {
+            <tr>
+              @for (col of table.definition.columns; track col.name) {
+                <td>
+                  <span class="data-table__cell">{{ formatCell(row[col.name]) }}</span>
+                </td>
+              }
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  } @else {
+    <p class="viewer__empty">
+      Aún no hay tablas. Ejecuta un
+      <code>CREATE TABLE</code>
+      para ver el esquema y los datos aquí.
+    </p>
+  }
+</section>

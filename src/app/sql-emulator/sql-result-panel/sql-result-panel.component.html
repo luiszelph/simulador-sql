@@ -1,0 +1,54 @@
+<section class="result" aria-labelledby="sql-result-title">
+  <h2 id="sql-result-title">Resultado de la ejecución</h2>
+
+  @if (emulator.lastResult(); as res) {
+    <div
+      class="result__banner"
+      [class.result__banner--error]="res.kind === 'error'"
+      [class.result__banner--ok]="res.kind === 'success'"
+      [class.result__banner--select]="res.kind === 'select'"
+      role="status"
+    >
+      @if (res.kind === 'error') {
+        <span class="result__label">Error</span>
+      } @else if (res.kind === 'select') {
+        <span class="result__label">SELECT</span>
+      } @else {
+        <span class="result__label">Éxito</span>
+      }
+      <p class="result__message">{{ res.message }}</p>
+      @if (res.affectedRows !== undefined && res.kind !== 'select') {
+        <p class="result__meta">Filas afectadas: {{ res.affectedRows }}</p>
+      }
+    </div>
+
+    @if (res.kind === 'select' && res.columns?.length && res.rows?.length) {
+      <div class="result__scroll" role="region" tabindex="0" aria-label="Resultado del SELECT">
+        <table class="result-table">
+          <thead>
+            <tr>
+              @for (col of res.columns; track col) {
+                <th scope="col">{{ col }}</th>
+              }
+            </tr>
+          </thead>
+          <tbody>
+            @for (row of res.rows; track $index) {
+              <tr>
+                @for (col of res.columns; track col) {
+                  <td>
+                    <span class="result-table__cell">{{ formatCell(row[col]) }}</span>
+                  </td>
+                }
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    } @else if (res.kind === 'select' && (res.rows?.length ?? 0) === 0) {
+      <p class="result__empty">La consulta no devolvió filas.</p>
+    }
+  } @else {
+    <p class="result__placeholder">Ejecuta una sentencia para ver el resultado aquí.</p>
+  }
+</section>

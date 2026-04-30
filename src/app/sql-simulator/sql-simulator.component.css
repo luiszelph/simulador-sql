@@ -1,0 +1,49 @@
+.sql-simulator {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.sql-simulator__header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sql-simulator__title {
+  margin: 0;
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.sql-simulator__lead {
+  margin: 0;
+  max-width: 48rem;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--sql-muted);
+}
+
+.sql-simulator__panels {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+@media (min-width: 960px) {
+  .sql-simulator__panels {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+}
+
+.sql-simulator app-sql-editor,
+.sql-simulator app-data-table-viewer,
+.sql-simulator app-sql-result-panel {
+  background: var(--sql-surface);
+  border: 1px solid var(--sql-border);
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  box-shadow: 0 1px 2px rgb(15 23 42 / 6%);
+}

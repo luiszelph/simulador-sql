@@ -1,0 +1,17 @@
+<section class="sql-simulator">
+  <header class="sql-simulator__header">
+    <h1 class="sql-simulator__title">{{ title() }}</h1>
+    <p class="sql-simulator__lead">
+      Emulador sencillo en memoria: el motor interpreta SQL limitado y almacena filas como objetos JavaScript (incluye columnas
+      <strong>JSON</strong>
+      nativas).
+    </p>
+  </header>
+
+  <app-sql-editor />
+
+  <div class="sql-simulator__panels">
+    <app-data-table-viewer />
+    <app-sql-result-panel />
+  </div>
+</section>

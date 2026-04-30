@@ -1,0 +1,31 @@
+<section class="editor" aria-labelledby="sql-editor-title">
+  <div class="editor__head">
+    <h2 id="sql-editor-title">Sentencias SQL</h2>
+    <p class="editor__hint">
+      Tipos admitidos: INTEGER, REAL, TEXT, BOOLEAN, JSON. Varias sentencias separadas por
+      <code>;</code>. WHERE simple:
+      <code>columna = valor</code>
+      u otros operadores
+      <code>!=</code>
+      <code>&lt;</code>
+      <code>&gt;</code>
+      <code>&lt;=</code>
+      <code>&gt;=</code>
+      .
+    </p>
+  </div>
+  <textarea
+    class="editor__textarea"
+    rows="12"
+    spellcheck="false"
+    [value]="draft()"
+    (input)="onInput($event)"
+    aria-label="Editor de sentencias SQL"
+  ></textarea>
+  <div class="editor__actions">
+    <button type="button" class="btn btn--primary" (click)="run()">Ejecutar</button>
+    <button type="button" class="btn btn--ghost" (click)="resetDatabase()">
+      Reiniciar base en memoria
+    </button>
+  </div>
+</section>

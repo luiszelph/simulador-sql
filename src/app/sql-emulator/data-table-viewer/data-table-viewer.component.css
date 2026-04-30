@@ -1,0 +1,116 @@
+.viewer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-height: 12rem;
+}
+
+.viewer__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.viewer__head h2 {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--sql-fg, #0f172a);
+}
+
+.viewer__picker {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.8125rem;
+}
+
+.viewer__picker-label {
+  color: var(--sql-muted, #64748b);
+}
+
+.viewer__select {
+  min-width: 10rem;
+  padding: 0.35rem 0.5rem;
+  border-radius: 0.375rem;
+  border: 1px solid var(--sql-border, #cbd5e1);
+  background: var(--sql-surface, #ffffff);
+}
+
+.viewer__meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.viewer__badge {
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.2rem 0.5rem;
+  border-radius: 999px;
+  background: var(--sql-code-bg, #f1f5f9);
+  color: var(--sql-muted, #64748b);
+}
+
+.viewer__scroll {
+  overflow: auto;
+  border: 1px solid var(--sql-border, #cbd5e1);
+  border-radius: 0.5rem;
+  max-height: 22rem;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8125rem;
+}
+
+.data-table th,
+.data-table td {
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--sql-border, #e2e8f0);
+  vertical-align: top;
+}
+
+.data-table thead th {
+  background: var(--sql-code-bg, #f8fafc);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.data-table__col-name {
+  display: block;
+  font-weight: 600;
+  color: var(--sql-fg, #0f172a);
+}
+
+.data-table__col-type {
+  display: block;
+  font-size: 0.6875rem;
+  font-weight: 400;
+  color: var(--sql-muted, #64748b);
+  font-family: ui-monospace, monospace;
+}
+
+.data-table__cell {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  word-break: break-word;
+}
+
+.viewer__empty {
+  margin: 0;
+  padding: 1rem;
+  font-size: 0.875rem;
+  color: var(--sql-muted, #64748b);
+  background: var(--sql-code-bg, #f8fafc);
+  border-radius: 0.5rem;
+  border: 1px dashed var(--sql-border, #cbd5e1);
+}
+
+.viewer__empty code {
+  font-size: 0.8125rem;
+}

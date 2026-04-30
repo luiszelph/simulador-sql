@@ -1,0 +1,110 @@
+:host {
+  --sql-fg: #0f172a;
+  --sql-muted: #64748b;
+  --sql-border: #cbd5e1;
+  --sql-code-bg: #f1f5f9;
+  --sql-surface: #ffffff;
+  --sql-accent: #2563eb;
+
+  display: block;
+  min-height: 100dvh;
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Ubuntu, Cantarell, 'Noto Sans',
+    sans-serif;
+  color: var(--sql-fg);
+  background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%);
+}
+
+.app-shell {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.app-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.app-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+@media (min-width: 720px) {
+  .app-brand {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+}
+
+.app-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.app-nav a {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--sql-muted);
+  text-decoration: none;
+  padding: 0.35rem 0.65rem;
+  border-radius: 0.5rem;
+  border: 1px solid transparent;
+}
+
+.app-nav a:hover {
+  color: var(--sql-fg);
+  background: rgb(148 163 184 / 16%);
+}
+
+.app-nav a.is-active {
+  color: var(--sql-fg);
+  border-color: var(--sql-border);
+  background: var(--sql-surface);
+}
+
+.app-title {
+  margin: 0;
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.app-lead {
+  margin: 0;
+  max-width: 48rem;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--sql-muted);
+}
+
+.app-panels {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+@media (min-width: 960px) {
+  .app-panels {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+}
+
+.app-shell app-equipos-excel {
+  background: var(--sql-surface);
+  border: 1px solid var(--sql-border);
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  box-shadow: 0 1px 2px rgb(15 23 42 / 6%);
+}

@@ -1,0 +1,100 @@
+<section class="equipos" aria-labelledby="equipos-titulo">
+  <header class="equipos__header">
+    <h1 id="equipos-titulo" class="equipos__title">Equipos (Excel simulado)</h1>
+    <p class="equipos__lead">
+      La plantilla se descarga como
+      <code>Equipos_dd_mm_yyyy_hh_mm_ss_mmm.xlsx</code>
+      (fecha y hora local). La primera fila del libro (título con ese mismo texto) no genera filas en la tabla. El nombre de la tabla
+      emulada es siempre
+      <strong>Equipos</strong>
+      ; al importar se ignoran fecha, hora y sufijos del nombre de archivo (p. ej.
+      <code>Equipos_cualquier_cosa.xlsx</code>
+      sigue siendo la tabla
+      <strong>Equipos</strong>
+      ).       La columna
+      <strong>Id</strong>
+      es autoincremental (1, 2, 3, …) al importar o al agregar desde el formulario; se ignora el Id del Excel.
+    </p>
+  </header>
+
+  <div class="equipos__toolbar" role="group" aria-label="Acciones de Excel">
+    <button type="button" class="btn btn--primary" (click)="onDescargarPlantilla()">Descargar plantilla Excel</button>
+    <button type="button" class="btn btn--ghost" (click)="onDispararLectura()">Leer Excel y poblar tabla</button>
+    <button type="button" class="btn btn--ghost" (click)="onDescargarDatos()" [disabled]="!excel.tieneDatos()">
+      Descargar datos en Excel
+    </button>
+    <input
+      #archivoExcel
+      class="equipos__file"
+      type="file"
+      accept=".xlsx,.xls"
+      (change)="onArchivoSeleccionado($event)"
+      aria-label="Seleccionar archivo Excel para importar"
+    />
+  </div>
+
+  @if (excel.mensaje(); as texto) {
+    <p class="equipos__msg" role="status">{{ texto }}</p>
+  }
+
+  <div class="equipos__panel">
+    <h2 class="equipos__panel-title">Tabla emulada: {{ excel.nombreTablaEmulada }}</h2>
+    <div class="equipos__table-wrap" role="region" aria-label="Vista previa de filas importadas" tabindex="0">
+      <table class="equipos__table">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">NombreEquipo</th>
+            <th scope="col">Marca</th>
+            <th scope="col">Precio</th>
+            <th scope="col">HospitalAsignado</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (fila of excel.filas(); track excel.trackPorId($index, fila)) {
+            <tr>
+              <td class="equipos__id">{{ fila.id }}</td>
+              <td>{{ fila.nombreEquipo }}</td>
+              <td>{{ fila.marca }}</td>
+              <td>{{ fila.precio | currency: 'USD' : 'symbol' : '1.2-2' }}</td>
+              <td>{{ fila.hospitalAsignado }}</td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="5" class="equipos__empty">Sin filas todavía. Importa un Excel o usa el formulario.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <form class="equipos__form" [formGroup]="formulario" (ngSubmit)="onAgregar()" novalidate>
+    <h2 class="equipos__form-title">Agregar fila manualmente</h2>
+    <div class="equipos__fields">
+      <label class="equipos__field">
+        <span>NombreEquipo</span>
+        <input type="text" formControlName="nombreEquipo" autocomplete="off" />
+        @if (formulario.controls.nombreEquipo.touched && formulario.controls.nombreEquipo.invalid) {
+          <span class="equipos__error">Requerido.</span>
+        }
+      </label>
+      <label class="equipos__field">
+        <span>Marca</span>
+        <input type="text" formControlName="marca" autocomplete="off" />
+      </label>
+      <label class="equipos__field">
+        <span>Precio</span>
+        <input type="number" formControlName="precio" min="0" step="0.01" />
+        @if (formulario.controls.precio.touched && formulario.controls.precio.invalid) {
+          <span class="equipos__error">Debe ser un número válido.</span>
+        }
+      </label>
+      <label class="equipos__field">
+        <span>HospitalAsignado</span>
+        <input type="text" formControlName="hospitalAsignado" autocomplete="off" />
+      </label>
+    </div>
+    <button type="submit" class="btn btn--primary">Agregar a la tabla</button>
+  </form>
+</section>

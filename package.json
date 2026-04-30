@@ -5,6 +5,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:gh": "ng build --configuration production --output-mode static --base-href /Simulador_sql/",
+    "deploy:gh": "npm run build:gh && npx angular-cli-ghpages --dir=dist/simulador-sql/browser",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:simulador-sql": "node dist/simulador-sql/server/server.mjs"
@@ -22,7 +24,8 @@
     "@angular/ssr": "^21.2.7",
     "express": "^5.1.0",
     "rxjs": "~7.8.0",
-    "tslib": "^2.3.0"
+    "tslib": "^2.3.0",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@angular/build": "^21.2.7",
@@ -30,6 +33,7 @@
     "@angular/compiler-cli": "^21.2.0",
     "@types/express": "^5.0.1",
     "@types/node": "^20.17.19",
+    "angular-cli-ghpages": "^3.0.3",
     "jsdom": "^28.0.0",
     "prettier": "^3.8.1",
     "typescript": "~5.9.2",
