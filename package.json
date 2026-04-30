@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "build:gh": "ng build --configuration production --output-mode static --base-href /simulador-sql/",
+    "build:gh": "ng build --configuration production --output-mode static --base-href /Simulador_sql/",
     "deploy:gh": "npm run build:gh && npx angular-cli-ghpages --dir=dist/simulador-sql/browser",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
